@@ -19,8 +19,13 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public User login() {
-        return null;
+    public boolean login(String username, String password) {
+        User user = dao.fetch(User.class,username);
+        if (user.getPassword().equals(password)){
+            return true;
+        }else{
+            return  false;
+        }
     }
 
     @Override
@@ -31,8 +36,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public boolean register(String username, String password) {
         User newuser = new User();
-        System.out.println(dao.fetch(User.class,username));
-        if (dao.fetch(User.class,username).getId()==null){
+        if (dao.fetch(User.class,username)==null){
             newuser.setId(UUID.randomUUID().toString());
             newuser.setUsername(username);
             newuser.setPassword(password);
