@@ -6,8 +6,10 @@ import org.nutz.dao.Dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
-public class IUserServiceImpl implements IUserService {
+public class UserServiceImpl implements IUserService {
     @Autowired
     private Dao dao;
 
@@ -27,8 +29,18 @@ public class IUserServiceImpl implements IUserService {
     }
 
     @Override
-    public User register() {
-        return null;
+    public boolean register(String username, String password) {
+        User newuser = new User();
+        System.out.println(dao.fetch(User.class,username));
+        if (dao.fetch(User.class,username).getId()==null){
+            newuser.setId(UUID.randomUUID().toString());
+            newuser.setUsername(username);
+            newuser.setPassword(password);
+            dao.insert(newuser);
+            return  true;
+        }else {
+            return  false;
+        }
     }
 
     @Override

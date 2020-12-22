@@ -1,5 +1,6 @@
 package TwentyA101.WFIDS.A101.controller;
 
+import TwentyA101.WFIDS.A101.model.User;
 import TwentyA101.WFIDS.A101.service.IUserService;
 import org.nutz.json.Json;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,6 @@ public class UserController {
             Map data = new HashMap();
             data.put("islogin","1");
             data.put("Username","kqq");
-
             return Json.toJson(data);
         }else{
             Map data = new HashMap();
@@ -35,5 +35,15 @@ public class UserController {
             System.out.println(Json.toJson(data));
             return Json.toJson(data);
         }
+    }
+    @RequestMapping("/register")
+    public String register(){
+        boolean u = userS.register("123","123");
+        if (u){
+
+        }else{
+
+        }
+        return u?"1":"2";
     }
 }

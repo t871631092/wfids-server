@@ -6,6 +6,6 @@ public interface IUserService {
     User isLogin();
     User login();
     boolean logout();
-    User register();
+    boolean register(String username, String password);
     boolean forget();
 }
